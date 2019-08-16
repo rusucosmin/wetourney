@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  contestant_one: one
+  contestant_two: one
+  winner: one
+  round: one
+
+two:
+  contestant_one: two
+  contestant_two: two
+  winner: two
+  round: two

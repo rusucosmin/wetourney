@@ -1,0 +1,13 @@
+%h1 TOP32
+
+%h1 Contestants
+%table.table
+  %thead
+    %tr
+      %th{scope: "col"} Contestant
+      %th{scope: "col"} # wons
+  %tbody
+    - @contestants.each do |contestant|
+      %tr
+        %td{scope: "row"}= contestant[0]
+        %td{scope: "row"}= contestant[1]

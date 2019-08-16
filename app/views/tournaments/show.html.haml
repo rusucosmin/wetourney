@@ -1,0 +1,40 @@
+%p#notice= notice
+%p#alert= alert
+%p
+  %strong Title:
+  = @tournament.title
+%p
+  %strong Contestants:
+- @tournament.contestants.each_with_index do |contestant, i|
+  = "#{i + 1}. #{contestant.name}"
+  %br/
+%br/
+%p
+  %strong Rounds:
+- @tournament.rounds.each_with_index do |round, i|
+  = "Round #{round.number}"
+  %p
+    %strong Matches:
+  %br/
+  - round.matches.each_with_index do |match, i|
+    = "M#{i + 1}: "
+    = match.contestant_one.name
+    vs
+    = match.contestant_two.name
+    = form_for match do |form|
+      .field
+        = form.label :winner
+        = form.collection_select(:winner_id, [match.contestant_one, match.contestant_two], :id, :name, include_blank: "Not yet played", class: "custom-select")
+        = form.submit class: "btn btn-primary"
+      .actions
+      %br/
+%br/
+- if @tournament.rounds.count == 0
+  = link_to 'Generate first round', generate_first_round_tournament_path(@tournament)
+  |
+- elsif @tournament.rounds.last.matches.count != 1
+  = link_to 'Generate next round', generate_next_round_tournament_path(@tournament)
+  |
+= link_to 'Edit', edit_tournament_path(@tournament)
+|
+= link_to 'Back', tournaments_path
